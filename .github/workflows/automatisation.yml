@@ -33,5 +33,5 @@ jobs:
       - name: Commit & Push changes
         run: |
           git add .
-          git commit -m "chore: data sync $(date '+%Y-%m-%d %H:%M:%S') [skip ci]" || echo "No changes"
+          git commit -m "THERE IS NOTHING HERE" || echo "No changes"
           git push
