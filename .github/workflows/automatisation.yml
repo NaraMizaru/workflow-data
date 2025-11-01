@@ -2,14 +2,15 @@ name: Workflow Data
 
 on:
   schedule:
-    - cron: "0 * * * *"
+    - cron: "0 1 * * *"
+    - cron: "0 9 * * *"
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  automatisation:
+  auto-commit:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,5 +33,5 @@ jobs:
       - name: Commit & Push changes
         run: |
           git add .
-          git commit -m "UPDATE TIME" || echo "No changes"
+          git commit -m "chore: data sync $(date '+%Y-%m-%d %H:%M:%S') [skip ci]" || echo "No changes"
           git push
