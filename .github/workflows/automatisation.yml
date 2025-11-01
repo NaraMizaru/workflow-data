@@ -1,0 +1,33 @@
+name: Workflow Data
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
+
+jobs:
+  auto-commit:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Setup Git
+        run: |
+          git config --global user.name "NaraMizaru"
+          git config --global user.email "hilal.muhammad0807@gmail.com"
+
+      - name: Update data file
+        run: |
+          mkdir -p data
+          echo "Last update: $(date)" > data/logs.txt
+
+      - name: Commit & Push changes
+        run: |
+          git add .
+          git commit -m "UPDATE TIME"
+          git push
